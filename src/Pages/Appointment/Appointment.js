@@ -1,50 +1,14 @@
 import React, { useState } from 'react';
-import { DayPicker } from 'react-day-picker';
-import 'react-day-picker/dist/style.css';
-import { format } from 'date-fns';
-
-const css = `
-  .my-selected:not([disabled]) { 
-    font-weight: bold; 
-    border: 2px solid red;
-  }
-  .my-selected:hover:not([disabled]) { 
-    border-color: green;
-    color: green;
-  }
-  .my-today { 
-    font-weight: bold;
-    font-size: 140%; 
-    color: green;
-  }
-`;
+import AppointmentBanner from './AppointmentBanner';
+import AvailableAppointment from './AvailableAppointment';
 
 const Appointment = () => {
     const [date, setDate] = useState(new Date());
     return (
-        <>
-        <style>{css}</style>
-        <div class="hero min-h-screen ">
-            <div class="hero-content flex-col lg:flex-row">
-                <img src="https://saibabatravels.com/wp-content/themes/saibaba/images/image8.png" class="max-w-30px lg:max-w-xs rounded-lg shadow-2xl" alt=""/>
-                <div className="min-h-screen lg:pt-32">
-                    <DayPicker 
-                    modifiersStyles={{
-                        disabled: { fontSize: '75%' }
-                      }}
-                      modifiersClassNames={{
-                        selected: 'my-selected',
-                        today: 'my-today'
-                      }}
-                    mode="single"
-                    selected={date}
-                    onSelect={setDate}/>
-                    <p>selected date: { format(date, 'PP') }</p>
-                </div>
-                
-            </div>
+        <div>
+            <AppointmentBanner date={date} setDate={setDate}/>
+            <AvailableAppointment date={date} />
         </div>
-        </>
     );
 };
 
